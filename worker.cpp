@@ -15,17 +15,20 @@
 worker::worker(QObject *parent) :
     QObject(parent)
 {
+    fileName = NULL;
 }
 
 void worker::logger(const QString message, const bool exit)
 {
-    char dateTime[20]; // sizeof("2013-03-21 11:41:59")
+    char dateTime[20] = "none"; // sizeof("2013-03-21 11:41:59")
     time_t rawtime;
-    struct tm * timeinfo;
-    time( &rawtime );
+    struct tm timeinfo;
 
-    timeinfo = localtime( &rawtime );
-    strftime(dateTime, sizeof(dateTime) , "%Y-%m-%d %H:%M:%S", timeinfo);
+    memset(&timeinfo, 0, sizeof(struct tm));
+    time(&rawtime);
+    localtime_r(&rawtime, &timeinfo);
+
+    strftime(dateTime, sizeof(dateTime) , "%Y-%m-%d %H:%M:%S", &timeinfo);
 
     printf("%s | %s\n", dateTime, message.toLocal8Bit().constData());
 
@@ -137,7 +140,7 @@ void worker::initFile(const QString filePath)
                 case Z_DATA_ERROR:
                 case Z_MEM_ERROR:
                     (void)inflateEnd(&strm);
-                    logger("Невозможно распаковать архив, код: "+ QString::number(ret) +"!\n", true);
+                    logger("Невозможно распаковать архив, код: "+ QString::number(ret) +"!", true);
                     return;
                 }
 
@@ -165,6 +168,7 @@ void worker::initFile(const QString filePath)
     printf("\n");
     logger("\t<- Обработка файла '"+filePath+"' окончена, строк: "+ QString::number(counter) +" шт.");
     fflush(stdout);
+    logFile.close();
 }
 
 void worker::lineProcess(const QByteArray fullLine)
@@ -279,7 +283,7 @@ int worker::preProcessLine(const unsigned char * input, const quint32 inputSize)
 void worker::saveQueryResult()
 {
     printf("%s | %8s | %d | %s | %s\n",
-           fileName->toLocal8Bit().constData(),
+           ((fileName) ? fileName->toLocal8Bit().constData() : ""),
            lastTime.toString("h:mm:ss").toLocal8Bit().constData(),
            lastPid,
            usersByPid.value(lastPid).toLocal8Bit().constData(),

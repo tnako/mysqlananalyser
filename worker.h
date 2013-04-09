@@ -12,7 +12,7 @@ public:
     explicit worker(QObject *parent = 0);
 
 private:
-    void logger(const QString, const bool exit = 0);
+    void logger(const QString, const bool exit = false);
     inline void lineProcess(const QByteArray);
     inline int getMagicType(const char *, char *);
     inline int preProcessLine(const unsigned char *, const quint32);

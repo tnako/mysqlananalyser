@@ -11,7 +11,7 @@ int main(int argc, char *argv[])
         fflush(stdout);
         return 1;
     } else {
-        printf("MySQLAnalyser v1.0\n");
+        printf("MySQLAnalyser v1.1\n");
     }
 
     QCoreApplication a(argc, argv);

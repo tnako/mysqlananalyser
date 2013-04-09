@@ -6,7 +6,9 @@
 
 QT       += core
 
-QMAKE_CXXFLAGS += -std=gnu++11
+QMAKE_CXXFLAGS += -std=gnu++11 -U_FORTIFY_SOURCE -D_FORTIFY_SOURCE=2 -fstack-protector-all -Wextra -Werror
+QMAKE_LFLAGS += -Wl,--as-needed
+
 LIBS    += -lz -lmagic
 
 QT       -= gui

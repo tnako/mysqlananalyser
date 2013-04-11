@@ -6,7 +6,7 @@
 
 QT       += core
 
-QMAKE_CXXFLAGS += -std=gnu++11 -U_FORTIFY_SOURCE -D_FORTIFY_SOURCE=2 -fstack-protector-all -Wextra -Werror
+QMAKE_CXXFLAGS += -std=gnu++11 -U_FORTIFY_SOURCE -D_FORTIFY_SOURCE=2 -fstack-protector-all -Wextra -Werror -march=native -mtune=native
 QMAKE_LFLAGS += -Wl,--as-needed
 
 LIBS    += -lz -lmagic

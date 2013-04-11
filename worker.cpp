@@ -5,7 +5,6 @@
 #include <QFile>
 #include <QCoreApplication>
 #include <QList>
-#include <QDebug>
 
 #define CHUNK 65535
 #define magickSize 1024

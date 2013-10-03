@@ -4,9 +4,10 @@
 #include "worker.h"
 
 #include <getopt.h>
+#include <stdio.h>
 
 #define PACKAGE "MySQLAnalyser"
-#define VERSION "1.2"
+#define VERSION "1.3"
 #define PACKAGE_STRING PACKAGE " v" VERSION
 
 

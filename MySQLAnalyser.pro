@@ -6,7 +6,9 @@
 
 QT       += core
 
-QMAKE_CXXFLAGS += -std=gnu++11 -U_FORTIFY_SOURCE -D_FORTIFY_SOURCE=2 -fstack-protector-all -Wextra -Werror -march=native -mtune=native
+QMAKE_CXXFLAGS_RELEASE -= -O2
+QMAKE_CXXFLAGS_RELEASE += -U_FORTIFY_SOURCE -D_FORTIFY_SOURCE=2 -fstack-protector -march=native -mtune=native -flto=8 -fuse-linker-plugin -Ofast
+
 QMAKE_LFLAGS += -Wl,--as-needed
 
 LIBS    += -lz -lmagic
@@ -18,6 +20,7 @@ CONFIG   += console
 CONFIG   -= app_bundle
 
 TEMPLATE = app
+
 
 
 SOURCES += main.cpp \

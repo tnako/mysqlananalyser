@@ -79,7 +79,8 @@ void worker::initFile(const QString filePath)
                 logger("нет переносов строк");
             }
         }
-    } else if(strcmp(fileType, "application/x-gzip; charset=binary") == 0) {
+    } else if(strcmp(fileType, "application/x-gzip; charset=binary") == 0 ||
+              strcmp(fileType, "application/x-gzip; charset=unknown") == 0) {
         // Обработка в архиве gzip
 
         int fileHandle = logFile.handle();

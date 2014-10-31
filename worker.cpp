@@ -196,7 +196,7 @@ void worker::lineProcess(const QByteArray fullLine)
             startAt = 1;
         }
 
-        if (line.at(startAt) == "Query") {
+        if (line.at(startAt) == "Query" || line.at(startAt) == "Execute" || line.at(startAt) == "Prepare") {
             type = 1;
         } else if (line.at(startAt) == "Connect") {
             type = 2;
